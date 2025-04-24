@@ -5,5 +5,5 @@ A customizable toast component for React Native with smooth animations.
 ## Installation
 
 ```bash
-npm install react-native-custom-toast
+npm install react-native-toastified
 ```
