@@ -1,26 +1,31 @@
 {
   "name": "react-native-toastified",
   "version": "1.0.0",
-  "description": "npm library for react-native cross platform, android-styled toast notifications. Super simple to setup and use.",
-  "main": "index.ts",
-  "types": "index.d.ts",
-  "author": "Abhishek Shekhar",
-  "license": "MIT",
+  "description": "A lightweight, android-styled, toast component for React-Native with a simple to use method and cross-platform support",
+  "main": "dist/CustomToast.js",
+  "types": "dist/CustomToast.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AShekharCodes/react-native-toastified.git"
+    "url": "git+https://github.com/AShekharCodes/react-native-toastified.git"
   },
   "keywords": [
     "react-native",
     "toast",
-    "notification",
-    "custom-toast"
+    "toastified",
+    "notification"
   ],
-  "dependencies": {
-    "react-native": "^0.64.0"
-  },
+  "author": "Abhishek Shekhar",
+  "license": "MIT",
   "peerDependencies": {
-    "react": "^17.0.0",
-    "react-native": "^0.64.0"
+    "react": ">=17.0.0",
+    "react-native": ">=0.64.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.72.0"
   }
 }

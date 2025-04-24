@@ -1,6 +1,6 @@
-# React Native Custom Toast
+# react-native-toastified
 
-A customizable toast component for React Native with smooth animations.
+A minimal and customizable toast component for React Native, with smooth fade-in/out animations.
 
 ## Installation
 
