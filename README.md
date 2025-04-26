@@ -1,14 +1,14 @@
 # react-native-toastified
 
-A lightweight, Android-styled, toast component for React Native with simple-to-use methods and cross-platform support.
+A lightweight and Android-styled toast component for React Native with simple-to-use method and cross-platform support.
 
 ---
 
 ## Features
 
 - **Cross-platform** support for both iOS and Android.
-- **Easy-to-use** API for showing and hiding toast messages.
-- Customizable **animations** for smooth, non-intrusive notifications.
+- **Easy-to-use** API for showing toast messages.
+- **animations** for smooth, non-intrusive notifications.
 - No dependencies other than `react` and `react-native`.
 
 ---
@@ -30,6 +30,8 @@ yarn add react-native-toastified
 After installation, you can use the `CustomToast` component anywhere in your app once you setup the `CustomToastWrapper` in your main `_layout.tsx/jsx` or `App.jsx/tsx` file
 
 ### 1. Import the component wrapper and the component
+
+#### In this example, I am using both components in a single file but it can be used seperately in another file after putting the `CustomToastWrapper` component in the main file as the last child of the view.
 
 Import the `CustomToastWrapper` and `CustomToast` component:
 
@@ -71,7 +73,7 @@ Use the `CustomToast.show()` method to display a toast message anywhere in your 
 CustomToast.show("Your message goes here!", 3000); // 3000ms is default duration
 ```
 
-To hide the toast manually:
+To hide the toast manually (Toasts hide automatically after specified duration or by default 3000ms i.e., 3s):
 
 ```tsx
 CustomToast.hide();
@@ -94,45 +96,11 @@ CustomToast.hide();
 
 - A wrapper component to be included in your component tree to manage toasts. It must be placed near the root component of your app (e.g., inside `<App />`).
 
----
+#### `CustomToastWrapper` component is only needed to be used once in the main file of your project, after that you can use `CustomToast` anywhere by importing `CustomToast` component
 
 ## Customization
 
-You can customize the toast message’s appearance by modifying the styles in the `CustomToast.tsx` file.
-
-The default toast is styled as follows:
-
-```tsx
-const styles = StyleSheet.create({
-  toast: {
-    position: "absolute",
-    bottom: 100,
-    alignSelf: "center",
-    backgroundColor: "#444",
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 30,
-    zIndex: 999,
-    elevation: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  text: {
-    color: "white",
-    fontFamily: "Poppins-Medium",
-    fontSize: 14,
-    textAlign: "center",
-    includeFontPadding: false,
-    textAlignVertical: "center",
-  },
-});
-```
-
-Feel free to override these styles as needed.
-
----
+#### The options to customize style or apply theme to Toasts will be added in future releases
 
 ## Contributing
 
