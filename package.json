@@ -1,6 +1,6 @@
 {
   "name": "react-native-toastified",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A lightweight, android-styled, toast component for React-Native with a simple to use method and cross-platform support",
   "main": "dist/CustomToast.js",
   "types": "dist/CustomToast.d.ts",

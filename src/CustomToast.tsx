@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { Animated, Text, StyleSheet } from "react-native";
 
+// Internal type
 export type CustomToastRef = {
   show: (message: string, duration?: number) => void;
   hide: () => void;
@@ -14,25 +15,54 @@ export type CustomToastRef = {
 const Toast = forwardRef<CustomToastRef>((_, ref) => {
   const opacity = useRef(new Animated.Value(0)).current;
   const [message, setMessage] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
 
   useImperativeHandle(ref, () => ({
     show: (msg: string, duration = 3000) => {
-      if (!isActive) {
-        setIsActive(true);
+      // Clear any existing timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        setTimeoutId(null);
+      }
+
+      // Hide the current toast instantly if it's visible
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 0, // Instant hide
+        useNativeDriver: true,
+      }).start(() => {
+        // Set new message
         setMessage(msg);
+
+        // Fade in
         Animated.timing(opacity, {
           toValue: 1,
           duration: 200,
           useNativeDriver: true,
         }).start(() => {
-          setTimeout(() => {
+          // Set new timeout
+          const id = setTimeout(() => {
             hide();
           }, duration);
+
+          setTimeoutId(id);
         });
-      }
+      });
     },
-    hide,
+    hide: () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        setTimeoutId(null);
+      }
+
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    },
   }));
 
   const hide = () => {
@@ -40,7 +70,7 @@ const Toast = forwardRef<CustomToastRef>((_, ref) => {
       toValue: 0,
       duration: 200,
       useNativeDriver: true,
-    }).start(() => setIsActive(false));
+    }).start();
   };
 
   return (
@@ -52,10 +82,12 @@ const Toast = forwardRef<CustomToastRef>((_, ref) => {
 
 const toastRef = React.createRef<CustomToastRef>();
 
+// The toast wrapper component to be mounted in your root layout
 export const CustomToastWrapper = () => {
   return <Toast ref={toastRef} />;
 };
 
+// Actual API to call
 const CustomToast = {
   show: (message: string, duration?: number) => {
     toastRef.current?.show(message, duration);
@@ -85,7 +117,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
+    fontFamily: "Poppins-Medium",
     fontSize: 14,
     textAlign: "center",
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
 });

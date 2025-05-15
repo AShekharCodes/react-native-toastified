@@ -1,14 +1,22 @@
+[![npm version](https://img.shields.io/npm/v/react-native-toastified)](https://www.npmjs.com/package/react-native-toastified)
+
 # react-native-toastified
 
 A lightweight and Android-styled toast component for React Native with simple-to-use method and cross-platform support.
 
 ---
 
+## Changelog
+
+### [1.0.2](https://github.com/AShekharCodes/react-native-toastified/compare/v1.0.1...v1.0.2)
+
+- Improved toast interruption and animation flow
+
 ## Features
 
 - **Cross-platform** support for both iOS and Android.
 - **Easy-to-use** API for showing toast messages.
-- **animations** for smooth, non-intrusive notifications.
+- **Animations** for smooth, non-intrusive notifications.
 - No dependencies other than `react` and `react-native`.
 
 ---
@@ -94,9 +102,35 @@ CustomToast.hide();
 
 ### `CustomToastWrapper`
 
-- A wrapper component to be included in your component tree to manage toasts. It must be placed near the root component of your app (e.g., inside `<App />`).
+- A wrapper component to be included in your component tree to manage toasts. It must be placed at end of the root component of your app's view, as the last child.
 
-#### `CustomToastWrapper` component is only needed to be used once in the main file of your project, after that you can use `CustomToast` anywhere by importing `CustomToast` component
+**Example:**
+
+```tsx
+return (
+  <>
+    <App />
+    <CustomToastWrapper />
+  </>
+);
+```
+
+### OR
+
+**Expo Stack Navigator**
+
+```tsx
+return (
+  <>
+  <Stack>
+  <Stack.Screen name="index" options={{ headerShown: false }} />
+  <Stack />
+  <CustomToastWrapper />
+  </>
+)
+```
+
+#### `CustomToastWrapper` component is only needed to be used once in the main file of your project, after that you can use `CustomToast` anywhere by importing the component
 
 ## Customization
 
